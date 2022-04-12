@@ -33,12 +33,4 @@ services:
       - "9411"
     ports:
       - "9411:9411"
-  sk-admin:
-    build: .
-    container_name: sk-admin
-    depends_on:
-      - consul
-      - zipkin
-      - mysql
-    ports:
-      - "9030:9030"
+
