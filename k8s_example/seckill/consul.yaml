@@ -1,0 +1,49 @@
+######################编写资源配置清单
+apiVersion: apps/v1
+kind: Deployment #定义资源的类型/角色，deployment为副本控制器
+#此处资源类型可以是Deployment、Job、Ingress、Service等
+metadata: #定义资源的元数据信息
+  namespace: seckill 
+  #同一个namespace下的pod默认在一个网关,在pods里执行ping会出现丢包，但是代码访问无问题
+  name: consul
+spec:
+  replicas: 1 #定义副本数量
+  selector: #定义选择器
+    matchLabels:
+        #需与后面的spec.template.metadata.labels定义的标签保持一致
+      app: consul
+#定义业务模板，如果有多个副本，所有副本的属性会按照模板的相关配置进行匹配
+  template:
+    metadata:
+      labels:
+        app: consul
+    spec:
+      containers: #定义容器信息
+        - args: #设置开启命令
+            - agent
+            - -server
+            - -bootstrap
+            - -ui
+            - -node=1
+            - -client=0.0.0.0
+          name: consul #容器名，与标签名要相同
+        #定义容器使用的镜像以及版本
+          image: consul:latest
+          ports:
+            - containerPort: 8500 #定义容器的对外端口
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: seckill
+  name: consul-svc  #Service配置中的元数据中的name，就是同一个namespace下容器访问的hostname
+spec:
+  type: NodePort
+  ports:
+    - port: 8500
+      nodePort: 30004 #集群外访问端口
+      targetPort: 8500 #相当于dockerfile中的expose
+  selector:
+  #此处定义的selector要与deployment所定义的selector相同
+#service依靠标签选择器来检索提供服务的nodes
+    app: consul

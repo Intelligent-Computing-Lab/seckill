@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: admin
+  name: admin-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 9030
+    targetPort: 9030 #相当于dockerfile中的expose
+  selector:
+#此处定义的selector要与deployment所定义的selector相同
+#service依靠标签选择器来检索提供服务的nodes
+    app: admin

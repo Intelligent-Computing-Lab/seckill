@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: seckill
+  labels:
+    app: admin
+  name: admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin
+  template:
+    metadata:
+      labels:
+        app: admin
+    spec:
+      containers:
+        - image: zpskt/seckill_admin:1.2
+          name: admin
+          ports:
+            - containerPort: 9030
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: seckill
+  labels:
+    app: admin
+  name: admin-svc
+spec:
+  type: NodePort
+  ports:
+    - port: 9030
+      nodePort: 30005 #集群外访问端口
+      targetPort: 9030 #相当于dockerfile中的expose
+  selector:
+#此处定义的selector要与deployment所定义的selector相同
+#service依靠标签选择器来检索提供服务的nodes
+    app: admin

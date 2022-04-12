@@ -1,0 +1,41 @@
+######################编写资源配置清单
+apiVersion: apps/v1 #指定api版本标签
+kind: Deployment  #定义资源的类型/角色，deployment为副本控制器
+#此处资源类型可以是Deployment、Job、Ingress、Service等
+metadata: #定义资源的元数据信息
+  # annotations: #设置标签
+  #   kompose.cmd: kompose convert
+  #   kompose.version: 1.26.0 (HEAD)
+  # creationTimestamp: null
+  labels: #定义资源标签
+    app: consul
+  name: secconsul  #定义资源的名称，在同一个namespace空间中必须是唯一的
+spec:
+  replicas: 1 #定义副本数量
+  selector:   #定义选择器
+    matchLabels:  #匹配上面的标签
+    #需与后面的.spec.template.metadata.labels定义的标签保持一致
+      app: consul  #匹配模板名称 ？
+  strategy: {}
+#定义业务模板，如果有多个副本，所有副本的属性会按照模板的相关配置进行匹配
+  template:   #定义模板
+    metadata:
+      labels:
+        app: consul
+    spec:
+      containers:   #定义容器信息
+        - args:
+            - agent
+            - -server
+            - -bootstrap
+            - -ui
+            - -node=1
+            - -client=0.0.0.0
+          #定义容器使用的镜像以及版本
+          image: consul:latest
+          name: consul   #容器名，与标签名要相同
+          ports:
+            - containerPort: 8500 #定义容器的对外端口
+          resources: {}
+      restartPolicy: Always
+status: {}

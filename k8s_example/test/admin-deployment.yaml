@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: admin
+  name: admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: admin
+    spec:
+      containers:
+        - image: zpskt/seckill_admin:1.0
+          name: admin
+          ports:
+            - containerPort: 9030
+          resources: {}
+      restartPolicy: Always
+status: {}

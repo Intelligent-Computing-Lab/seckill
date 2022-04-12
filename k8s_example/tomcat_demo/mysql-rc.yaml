@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ReplicationController
+#Replication Controller简称RC，
+#它能够保证Pod持续运行，并且在任何时候都有指定数量的Pod副本，
+#在此基础上提供一些高级特性，比如滚动升级和弹性伸缩
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.7
+          ports:
+          - containerPort: 3306
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: '123456'

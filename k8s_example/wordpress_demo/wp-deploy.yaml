@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wp
+  template:
+    metadata:
+      labels:
+        app: wp
+    spec:
+      containers:
+      - name: wp
+        image: wordpress:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: 'mysql-wp'
+        - name: WORDPRESS_DB_USER
+          value: 'wordpress'
+        - name: WORDPRESS_DB_PASSWORD
+          value: 'wordpress'
+        resources:
+          limits:
+            cpu: 100m
+          requests:
+            cpu: 100m

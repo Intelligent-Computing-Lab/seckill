@@ -1,0 +1,25 @@
+#创建tomcat对应的RC文件tomcat-rc.yaml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myweb
+spec:
+  replicas: 2
+  selector:
+    app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      containers:
+        - name: myweb
+          image: tomcat:latest
+          ports:
+          - containerPort: 8080
+          env:
+          #  Tomcat容器内，应用将使用的环境变量MYSQL_SERVICE_HOST的值连接mysql服务。更安全可靠的用法是使用服务的名称“mysql”。
+          - name: MYSQL_SERVICE_HOST
+            value: 'mysql'
+          - name: MYSQL_SERVICE_PORT
+            value: '3306'

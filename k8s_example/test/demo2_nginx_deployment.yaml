@@ -1,0 +1,38 @@
+######################编写资源配置清单
+#指定api版本标签
+apiVersion: apps/v1
+#定义资源的类型/角色，deployment为副本控制器
+#此处资源类型可以是Deployment、Job、Ingress、Service等
+kind: Deployment
+#定义资源的元数据信息，比如资源的名称、namespace、标签等信息
+metadata:
+#定义资源的名称，在同一个namespace空间中必须是唯一的
+  name: nginx-test
+  labels:
+    app: nginx
+#定义deployment资源需要的参数属性，诸如是否在容器失败时重新启动容器的属性
+spec:
+#定义副本数量
+  replicas: 3
+#定义标签选择器
+  selector:
+#定义匹配标签
+    matchLabels:
+#需与后面的.spec.template.metadata.labels定义的标签保持一致
+      app: nginx
+#定义业务模板，如果有多个副本，所有副本的属性会按照模板的相关配置进行匹配
+  template:
+    metadata:
+#定义Pod副本将使用的标签，需与前面的.spec.selector.matchLabels定义的标签保持一致
+      labels:
+        app: nginx
+    spec:
+#定义容器属性
+      containers:
+#定义一个容器名，一个-name:定义一个容器
+      - name: nginx
+#定义容器使用的镜像以及版本
+        image: nginx:1.15.4
+        ports:
+#定义容器对外的端口
+        - containerPort: 80

@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ReplicationController
+#Replication Controller简称RC，
+#它能够保证Pod持续运行，并且在任何时候都有指定数量的Pod副本，
+#在此基础上提供一些高级特性，比如滚动升级和弹性伸缩
+metadata:
+  namespace: seckill
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: zpskt/seckillmysql:1.1
+          ports:
+          - containerPort: 3306
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: 'zhangpeng'
+---
+#此Service配置事为了和mysql的pod进行关联
+apiVersion: v1
+kind: Service
+# metadata.name 是service的服务名；
+# port定义了service的虚端口；spec.selector确定了哪些pod副本对应的服务到本服务。
+metadata:
+  namespace: seckill
+  name: mysql-svc
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+  selector:
+    app: mysql
+#mysql服务被分配到一个职位192.168.137.225的cluster ip地址上，这是一个虚地址。随后k8s集群中其他新创建的pod的就可以通过service 的cluster ip+端口3306来连接和访问它。

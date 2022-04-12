@@ -1,0 +1,16 @@
+###############创建service服务对外提供访问并测试
+apiVersion: v1 #指定api版本标签
+kind: Service  #定义资源的类型/角色，deployment为副本控制器
+metadata: #定义资源的元数据信息
+  labels: #定义资源标签
+    app: consul
+  name: consul-svc  #定义资源的名称，在同一个namespace空间中必须是唯一的
+spec:
+  type: NodePort
+  ports:
+  - port: 8500
+    targetPort: 8500 #相当于dockerfile中的expose
+  selector:
+#此处定义的selector要与deployment所定义的selector相同
+#service依靠标签选择器来检索提供服务的nodes
+    app: consul
