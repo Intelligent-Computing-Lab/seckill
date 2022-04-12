@@ -59,9 +59,35 @@ viper.AddConfigPath（"path）换成你的本机文件地址
 ./seckill/接口测试文档/*
 
 ### docker启动   
+    docker-compose up
 默认用本地代码Dockerfile镜像，如果用dockerhub，选择对应版本2.0，把docker-compose.yaml文件里面build注释，images取消注释。  
 
-    docker-compose up
+若不适用上面的docker-compose启动，想要使用每个服务根目录下的dockerfile，请先在各自的服务根目录下执行  
+
+        go mod init
+具体如下:  
+1. 在seckill-admin目录下执行  
+   
+        go mod tidy
+        docker build -f Dokcerfile -t seckill-admin:自定义版本
+   
+2. 在seckill-core目录下执行  
+   
+        go mod tidy  
+        docker build -f Dokcerfile -t seckill-core:自定义版本
+
+3. 在seckill-app目录下执行  
+   
+        go mod tidy  
+        docker build -f Dokcerfile -t seckill-tidy:自定义版本
+
+上述执行完后各个服务的镜像就建立完成了
+接下来执行docker run 命令来跑容器，具体如下：
+
+        docker run seckill-admin:自定义版本
+        docker run seckill-core:自定义版本
+        docker run seckill-tidy:自定义版本
+
 ### API接口  
 都在接口测试文档文件夹里，APIfox工具。  
 ### docker 常用命令    
