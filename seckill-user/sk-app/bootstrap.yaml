@@ -5,7 +5,7 @@ http:
 
 
 rpc:
-  host: localhost
+  host: 49.233.111.31
   port: 9132
 
 discover:

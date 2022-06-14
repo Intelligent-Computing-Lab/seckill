@@ -4,7 +4,7 @@ http:
   port: 9009
 
 rpc:
-  host: localhost
+  host: 49.233.111.31
   port: 9108
 
 discover:

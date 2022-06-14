@@ -3,11 +3,11 @@ http:
   port: 9032
 
 rpc:
-  host: localhost
+  host: 49.233.111.31
   port: 9132
 
 discover:
-  Host: secconsul
+  Host: 49.233.111.31
   port: 8500
   instanceId: sk-core-localhost
   serviceName: sk-core # 要缓存sk-app

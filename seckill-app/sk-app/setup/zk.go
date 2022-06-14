@@ -11,7 +11,7 @@ import (
 
 //初始化Etcd
 func InitZk() {
-	var hosts = []string{"39.99.214.230:2181"}
+	var hosts = []string{"49.233.111.31:2181"}
 	//option := zk.WithEventCallback(waitSecProductEvent)
 	conn, _, err := zk.Connect(hosts, time.Second*5)
 	if err != nil {
@@ -29,6 +29,7 @@ func InitZk() {
 func loadSecConf(conn *zk.Conn) {
 	log.Printf("Connect zk sucess %s", conf.Zk.SecProductKey)
 	v, _, err := conn.Get(conf.Zk.SecProductKey) //conf.Etcd.EtcdSecProductKey
+	print("姜猛修改标记，打印获取到的v", v)
 	if err != nil {
 		log.Printf("get product info failed, err : %v", err)
 		return
@@ -39,6 +40,7 @@ func loadSecConf(conn *zk.Conn) {
 	if err1 != nil {
 		log.Printf("Unmsharl second product info failed, err : %v", err1)
 	}
+	print("姜猛修改标记，打印传的参数secProductInfo", secProductInfo)
 	updateSecProductInfo(secProductInfo)
 }
 
@@ -79,6 +81,7 @@ func waitSecProductEvent(event zk.Event) {
 //更新秒杀商品信息；监听秒杀商品配置
 func updateSecProductInfo(secProductInfo []*conf.SecProductInfoConf) {
 	tmp := make(map[int]*conf.SecProductInfoConf, 1024)
+	fmt.Println("姜猛修改标记，打印存入SecProductInfoMap的tmp", tmp)
 	for _, v := range secProductInfo {
 		log.Printf("updateSecProductInfo %v", v)
 		tmp[v.ProductId] = v

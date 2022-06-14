@@ -112,15 +112,20 @@ func (p ActivityServiceImpl) syncToZk(activity *model.Activity) error {
 	var flags int32 = 0
 	// permission
 	var acls = zk.WorldACL(zk.PermAll)
-
+	//姜猛修改标记，尝试修改set的version参数
+	_, sate, _ := conn.Get(zkPath)
 	// create or update
 	exisits, _, _ := conn.Exists(zkPath)
 	if exisits {
-		_, err_set := conn.Set(zkPath, byteData, flags)
+		fmt.Println("姜猛修改标记,测试是否进入if exisits 的if分支")
+		//姜猛修改标记，尝试修改set的version参数
+		_, err_set := conn.Set(zkPath, byteData, sate.Version)
+		//_, err_set := conn.Set(zkPath, byteData, flags)
 		if err_set != nil {
 			fmt.Println("zk添加失败", err_set)
 		}
 	} else {
+		fmt.Println("姜猛修改标记,测试是否进入if exisits 的else分支")
 		_, err_create := conn.Create(zkPath, byteData, flags, acls)
 		if err_create != nil {
 			fmt.Println("zk新建失败：", err_create)

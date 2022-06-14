@@ -33,7 +33,7 @@
 >admin.serverPort=8001
 
 客户端链接
-    ./zkCli.sh -server localhost:2181
+    ./zkCli.sh -server 49.233.111.31:2181
 #### zookeeper可视化工具
     git clone https://github.com/DeemOpen/zkui.git
     cd zkui

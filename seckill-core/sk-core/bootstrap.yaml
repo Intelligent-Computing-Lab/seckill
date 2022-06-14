@@ -3,11 +3,11 @@ http:
   port: 9032
 
 rpc:
-  host: localhost
+  host: 49.233.111.31
   port: 9132
 
 discover:
-  Host: secconsul
+  Host: 49.233.111.31
   port: 8500
   instanceId: sk-core-localhost
   serviceName: sk-core # 要缓存sk-app
@@ -25,19 +25,19 @@ config:
 
 
 trace:
-  host: seczipkin
+  host: 49.233.111.31
   port: 9411
   url: /api/v2/spans
 
 mysql:
-  host: secmysql
+  host: 49.233.111.31
   port: 3306
   user: root
   pwd: zhangpeng
   Db: seckill
 
 redis:
-  host: 39.99.214.230:6379
+  host: 49.233.111.31:6379
   password: zhangpeng
   db: 0
   Proxy2layerQueueName: proxy2layer
