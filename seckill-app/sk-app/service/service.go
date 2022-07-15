@@ -231,7 +231,7 @@ func SecInfoById(productId int) (map[string]interface{}, int, error) {
 //姜猛修改标记,整体复制zk.go的函数,分割线+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //初始化Etcd
 func InitZk() {
-	var hosts = []string{"49.233.111.31:2181"}
+	var hosts = []string{"152.136.197.135:2181"}
 	//option := zk.WithEventCallback(waitSecProductEvent)
 	conn, _, err := zk.Connect(hosts, time.Second*5)
 	if err != nil {

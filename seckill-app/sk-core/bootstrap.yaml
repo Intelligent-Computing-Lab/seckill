@@ -3,7 +3,7 @@ http:
   port: 9032
 
 rpc:
-  host: 49.233.111.31
+  host: 152.136.197.135
   port: 9132
 
 discover:

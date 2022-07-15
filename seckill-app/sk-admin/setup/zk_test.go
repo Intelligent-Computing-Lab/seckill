@@ -26,7 +26,7 @@ func waitSecProductEvent(event zk.Event) {
 }
 
 func TestInitZK(t *testing.T) {
-	var hosts = []string{"49.233.111.31:2181"}
+	var hosts = []string{"152.136.197.135:2181"}
 	option := zk.WithEventCallback(waitSecProductEvent)
 	conn, _, err := zk.Connect(hosts, time.Second*5, option)
 	if err != nil {
