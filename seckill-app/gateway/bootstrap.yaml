@@ -25,7 +25,7 @@ rpc:
   port: 1111
 
 mysql:
-  host: 39.99.214.230
+  host: 152.136.197.135
   port: 3306
   user: root
   pwd: zhangpeng

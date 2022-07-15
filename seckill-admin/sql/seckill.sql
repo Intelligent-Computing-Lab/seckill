@@ -4,7 +4,7 @@
  Source Server         : 阿里云mysql
  Source Server Type    : MySQL
  Source Server Version : 50651
- Source Host           : 39.99.214.230:3306
+ Source Host           : 152.136.197.135:3306
  Source Schema         : seckill
 
  Target Server Type    : MySQL

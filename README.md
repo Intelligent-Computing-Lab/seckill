@@ -4,7 +4,7 @@
 2.mysql
 我已经安装完了,配置如下
 >mysql:  
-host: 39.99.214.230  
+host: 152.136.197.135  
 port: 3306  
 user: root  
 pwd: zhangpeng  
@@ -13,7 +13,7 @@ Db: seckill
 3.redis  
 我也安装部署完了，配置如下
 >redis:  
-host: 39.99.214.230:6379  
+host: 152.136.197.135:6379  
 password: zhangpeng  
 db: 0  
 Proxy2layerQueueName: proxy2layer  

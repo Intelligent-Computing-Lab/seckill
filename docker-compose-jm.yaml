@@ -11,10 +11,10 @@ services:
     #    command: agent -client=0.0.0.0 -retry-join=consul1 -ui -node=client1 -datacenter=dc1
     command: agent -server -bootstrap -ui -node=1 -client='0.0.0.0'
     extra_hosts:
-      - secconsul:49.233.111.31
-      - secredis:49.233.111.31
-      - secmysql:49.233.111.31
-      - seczipkin:49.233.111.31
+      - secconsul:152.136.197.135
+      - secredis:152.136.197.135
+      - secmysql:152.136.197.135
+      - seczipkin:152.136.197.135
       - sk-admin:10.98.149.197
       - sk-app:10.110.239.147
       - sk-core:10.106.47.161
