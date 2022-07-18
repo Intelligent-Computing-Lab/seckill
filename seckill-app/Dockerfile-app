@@ -1,5 +1,5 @@
 ﻿#原镜像
-FROM golang:1.15.15 as builder
+FROM golang:1.17 as builder
 #新建文件夹
 RUN mkdir /app
 #复制代码
@@ -11,7 +11,7 @@ ENV GOPROXY https://goproxy.cn,direct
 #go构建可执行文件
 RUN go build .
 
-FROM centos:Chinese as runner
+FROM centos:latest as runner
 
 #指定工作目录
 WORKDIR /go/app
