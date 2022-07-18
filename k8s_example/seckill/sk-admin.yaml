@@ -15,8 +15,9 @@ spec:
       labels:
         app: admin
     spec:
+
       containers:
-        - image: zpskt/seckill_admin:1.2
+        - image: 81.70.216.174/seckill/seckill-admin:V3.0
           name: admin
           ports:
             - containerPort: 9030
